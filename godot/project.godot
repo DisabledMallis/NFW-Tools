@@ -10,21 +10,20 @@ config_version=5
 
 [application]
 
-config/name="Bloons TD 5 Rewritten"
-run/main_scene="res://NewFramework/GameRoot.tscn"
+config/name="NFW Toolkit"
+run/main_scene="res://Tools/Main/ToolMain.tscn"
 config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 PathUtil="*res://Scripts/path_util.gd"
-AssetImporterConfig="*res://Scripts/asset_importer_config.gd"
 AsyncResourceLoader="*res://NewFramework/Scripts/Assets/AsyncResourceLoader.cs"
 TextureLoader="*res://NewFramework/Scripts/Assets/TextureLoader.cs"
-JetFileImporter="*res://NewFramework/Scripts/Assets/JetFileImporter.cs"
 
 [display]
 
+window/subwindows/embed_subwindows=false
 window/dpi/allow_hidpi=false
 window/vsync/vsync_mode=0
 

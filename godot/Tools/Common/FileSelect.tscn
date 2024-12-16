@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://r6ditnarc3pj"]
+
+[ext_resource type="Script" path="res://Tools/Common/FileSelect.cs" id="1_x5g7w"]
+
+[node name="FileSelect" type="HBoxContainer" node_paths=PackedStringArray("FilePathEdit", "FileSelectButton")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x5g7w")
+FilePathEdit = NodePath("LineEdit")
+FileSelectButton = NodePath("Button")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "..."
