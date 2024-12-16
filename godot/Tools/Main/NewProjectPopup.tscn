@@ -5,20 +5,23 @@
 
 [node name="NewProjectPopup" type="Window" node_paths=PackedStringArray("CancelButton")]
 title = "New Project"
-size = Vector2i(440, 141)
+position = Vector2i(0, 36)
+size = Vector2i(400, 200)
 script = ExtResource("1_o44d0")
 CancelButton = NodePath("MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Cancel")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 
 [node name="LocationLabel" type="Label" parent="MarginContainer/VBoxContainer"]
@@ -40,7 +43,7 @@ text = "Game Location"
 [node name="GameSelect" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_g7ucj")]
 layout_mode = 2
 DialogTitle = "Project Location"
-FileFilter = PackedStringArray("*.exe;*.exe;PE Image", "*;*;Binary Executable", "*.app;*.app;Mac OSX Package")
+FileFilter = PackedStringArray("*.exe;*.exe;PE Image", "*.app;*.app;Mac OSX Package", "*.*;*.*;All files")
 FileMode = 2
 
 [node name="LineEdit" parent="MarginContainer/VBoxContainer/GameSelect" index="0"]

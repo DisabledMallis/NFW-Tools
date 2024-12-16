@@ -30,6 +30,7 @@ public partial class FileSelect : HBoxContainer
 		dialog.Filters = FileFilter;
 		dialog.UseNativeDialog = true;
 		dialog.FileSelected += OnFileSelected;
+		dialog.DirSelected += OnFileSelected;
 		dialog.Show();
 	}
 
