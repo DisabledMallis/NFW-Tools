@@ -1,47 +1,52 @@
-[gd_scene load_steps=4 format=3 uid="uid://8fajxwt8mwek"]
+[gd_scene load_steps=5 format=3 uid="uid://8fajxwt8mwek"]
 
+[ext_resource type="Script" path="res://Tools/Main/Toolkit.cs" id="1_0yveg"]
 [ext_resource type="PackedScene" uid="uid://dd8or5yfch206" path="res://Tools/Main/NewProjectPopup.tscn" id="1_enp1d"]
 [ext_resource type="Script" path="res://Tools/Main/FileMenu.cs" id="1_pld7f"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_xf0im"]
-font_size = 48
+[ext_resource type="PackedScene" uid="uid://dxd82iyyf1sfq" path="res://Tools/Workspace/Workspace.tscn" id="2_npdra"]
 
 [node name="ToolMain" type="Node2D"]
+script = ExtResource("1_0yveg")
+WorkspaceScene = ExtResource("2_npdra")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="ToolLayer" type="CanvasLayer" parent="."]
 
-[node name="MenuBar" type="MenuBar" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="File" type="PopupMenu" parent="CanvasLayer/MenuBar" node_paths=PackedStringArray("SceneRoot")]
-item_count = 2
-item_0/text = "New Project"
-item_1/text = "Open Sprite"
-item_1/id = 1
-script = ExtResource("1_pld7f")
-NewProjectPopup = ExtResource("1_enp1d")
-SceneRoot = NodePath("../../..")
-
-[node name="Edit" type="PopupMenu" parent="CanvasLayer/MenuBar"]
-item_count = 1
-item_0/text = "Settings"
-
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ToolLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="ToolLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="MenuBar" type="MenuBar" parent="ToolLayer/VBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Welcome" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
-layout_mode = 2
-text = "Welcome to NFW-Toolkit"
-label_settings = SubResource("LabelSettings_xf0im")
+[node name="File" type="PopupMenu" parent="ToolLayer/VBoxContainer/MarginContainer/MenuBar" node_paths=PackedStringArray("SceneRoot")]
+size = Vector2i(114, 100)
+item_count = 4
+item_0/text = "New Project"
+item_1/text = "Open Project"
+item_1/id = 1
+item_2/text = "Open Game (read-only)"
+item_2/id = 2
+item_3/text = "Open NKHook5 Project"
+item_3/id = 3
+script = ExtResource("1_pld7f")
+NewProjectPopup = ExtResource("1_enp1d")
+SceneRoot = NodePath("../../../../..")
 
-[node name="Label" type="Label" parent="CanvasLayer/CenterContainer/VBoxContainer"]
+[node name="Edit" type="PopupMenu" parent="ToolLayer/VBoxContainer/MarginContainer/MenuBar"]
+item_count = 1
+item_0/text = "Settings"
+
+[node name="Workspace" parent="ToolLayer/VBoxContainer" instance=ExtResource("2_npdra")]
 layout_mode = 2
-text = "Use the 'file' menu option to open a resource"
+
+[node name="MenuLayer" type="CanvasLayer" parent="."]

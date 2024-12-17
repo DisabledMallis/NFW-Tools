@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxh1403lkax6j"]
+
+[ext_resource type="Texture2D" uid="uid://c15v4vi3was6j" path="res://Tools/Workspace/Sprite.svg" id="1_uvlyi"]
+
+[node name="Sprite" type="Button"]
+text = "Sprite"
+icon = ExtResource("1_uvlyi")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true

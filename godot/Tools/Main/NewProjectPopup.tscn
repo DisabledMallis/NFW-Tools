@@ -1,14 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://dd8or5yfch206"]
+[gd_scene load_steps=4 format=3 uid="uid://dd8or5yfch206"]
 
 [ext_resource type="PackedScene" uid="uid://r6ditnarc3pj" path="res://Tools/Common/FileSelect.tscn" id="1_g7ucj"]
 [ext_resource type="Script" path="res://Tools/Main/NewProjectPopup.cs" id="1_o44d0"]
 
-[node name="NewProjectPopup" type="Window" node_paths=PackedStringArray("CancelButton")]
+[sub_resource type="LabelSettings" id="LabelSettings_t1oy1"]
+font_size = 14
+font_color = Color(1, 0, 0, 1)
+
+[node name="NewProjectPopup" type="Window" node_paths=PackedStringArray("ProjectLocationEdit", "ProjectLocationError", "GameLocationEdit", "GameLocationError", "CancelButton", "CreateButton")]
 title = "New Project"
-position = Vector2i(0, 36)
-size = Vector2i(400, 200)
+initial_position = 2
+size = Vector2i(400, 180)
+exclusive = true
+force_native = true
+min_size = Vector2i(400, 180)
 script = ExtResource("1_o44d0")
-CancelButton = NodePath("MarginContainer/VBoxContainer/CenterContainer/HBoxContainer/Cancel")
+ProjectLocationEdit = NodePath("MarginContainer/VBoxContainer/VBoxContainer/ProjectSelect/LineEdit")
+ProjectLocationError = NodePath("MarginContainer/VBoxContainer/VBoxContainer/ProjectLabelContainer/ErrorLabel")
+GameLocationEdit = NodePath("MarginContainer/VBoxContainer/VBoxContainer/GameSelect/LineEdit")
+GameLocationError = NodePath("MarginContainer/VBoxContainer/VBoxContainer/GameLabelContainer/ErrorLabel")
+CancelButton = NodePath("MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/Cancel")
+CreateButton = NodePath("MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/Create")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -23,45 +35,71 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+alignment = 1
 
-[node name="LocationLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ProjectLabelContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LocationLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/ProjectLabelContainer"]
 layout_mode = 2
 text = "Project Location"
 
-[node name="ProjectSelect" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_g7ucj")]
+[node name="ErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/ProjectLabelContainer"]
+visible = false
+layout_mode = 2
+text = "(Invalid)"
+label_settings = SubResource("LabelSettings_t1oy1")
+
+[node name="ProjectSelect" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("1_g7ucj")]
 layout_mode = 2
 DialogTitle = "Project Location"
 FileMode = 2
 
-[node name="LineEdit" parent="MarginContainer/VBoxContainer/ProjectSelect" index="0"]
+[node name="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/ProjectSelect" index="0"]
 size_flags_horizontal = 3
 
-[node name="LocationLabel2" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="GameLabelContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LocationLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/GameLabelContainer"]
 layout_mode = 2
 text = "Game Location"
 
-[node name="GameSelect" parent="MarginContainer/VBoxContainer" instance=ExtResource("1_g7ucj")]
+[node name="ErrorLabel" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer/GameLabelContainer"]
+visible = false
+layout_mode = 2
+text = "(Invalid)"
+label_settings = SubResource("LabelSettings_t1oy1")
+
+[node name="GameSelect" parent="MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("1_g7ucj")]
 layout_mode = 2
 DialogTitle = "Project Location"
 FileFilter = PackedStringArray("*.exe;*.exe;PE Image", "*.app;*.app;Mac OSX Package", "*.*;*.*;All files")
-FileMode = 2
 
-[node name="LineEdit" parent="MarginContainer/VBoxContainer/GameSelect" index="0"]
+[node name="LineEdit" parent="MarginContainer/VBoxContainer/VBoxContainer/GameSelect" index="0"]
 size_flags_horizontal = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
+alignment = 1
 
-[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Cancel"
 
-[node name="Create" type="Button" parent="MarginContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+[node name="Create" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Create"
 
-[editable path="MarginContainer/VBoxContainer/ProjectSelect"]
-[editable path="MarginContainer/VBoxContainer/GameSelect"]
+[editable path="MarginContainer/VBoxContainer/VBoxContainer/ProjectSelect"]
+[editable path="MarginContainer/VBoxContainer/VBoxContainer/GameSelect"]

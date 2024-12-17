@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bmh2oenfjgymm"]
+
+[node name="ProjectTreeContextGeneric" type="PopupMenu"]
+size = Vector2i(204, 116)
+visible = true
+unfocusable = true
+prefer_native_menu = true
+item_count = 4
+item_0/text = "New CompoundSprite"
+item_1/text = "New Tower Definition"
+item_1/id = 1
+item_2/text = "New Bloon Definition"
+item_2/id = 2
+item_3/text = "New Weapon Definition"
+item_3/id = 3

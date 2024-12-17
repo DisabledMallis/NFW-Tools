@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb7wb451hr10j"]
+
+[ext_resource type="Texture2D" uid="uid://crl4621h5ibvj" path="res://Tools/Workspace/Search.svg" id="1_417ia"]
+[ext_resource type="Script" path="res://Tools/Workspace/SpriteManagerUI.cs" id="1_544d1"]
+[ext_resource type="Texture2D" uid="uid://cqfjev83yt3nu" path="res://Tools/Workspace/ArrowUp.svg" id="3_46psk"]
+
+[node name="SpriteManager" type="VBoxContainer"]
+size_flags_vertical = 3
+script = ExtResource("1_544d1")
+
+[node name="SearchArea" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="SearchArea"]
+layout_mode = 2
+placeholder_text = "Filter Sprites"
+right_icon = ExtResource("1_417ia")
+
+[node name="Button" type="Button" parent="SearchArea"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+icon = ExtResource("3_46psk")
+icon_alignment = 1
+expand_icon = true
+
+[node name="SpriteArea" type="HFlowContainer" parent="."]
+layout_mode = 2

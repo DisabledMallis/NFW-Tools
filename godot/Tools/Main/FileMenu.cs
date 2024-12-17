@@ -16,7 +16,7 @@ public partial class FileMenu : PopupMenu
 		switch (id)
 		{
 			case 0:
-				SceneRoot?.AddChild(NewProjectPopup?.Instantiate());
+				Toolkit.Instance.SetupWorkspace();
 				break;
 		}
 	}

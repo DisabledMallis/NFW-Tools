@@ -27,7 +27,14 @@ public partial class FileSelect : HBoxContainer
 		dialog.Access = FileDialog.AccessEnum.Filesystem;
 		dialog.CurrentDir = StartingDirectory;
 		dialog.FileMode = FileMode;
-		dialog.Filters = FileFilter;
+		if (FileFilter?.Length > 0)
+		{
+			dialog.Filters = FileFilter;
+		}
+		else
+		{
+			dialog.Filters = new[] { "*;All folders" };
+		}
 		dialog.UseNativeDialog = true;
 		dialog.FileSelected += OnFileSelected;
 		dialog.DirSelected += OnFileSelected;
