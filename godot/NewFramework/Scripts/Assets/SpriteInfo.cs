@@ -12,19 +12,22 @@ public partial class SpriteInfo : Node
 {
     private string _name;
     private SpriteInfo? _parent = null;
+    private readonly string _texturesDirPath;
     private readonly TextureQuality _firstQuality;
     private readonly List<SpriteInfo> _children = new();
     private readonly List<FrameInfo> _frames = new();
-    public List<FrameInfo> Frames => _frames;
 
-    public readonly IFileSystemEntry FileEntry;
-    public IAssetSource AssetSource;
+    public readonly string Path;
 
-    public SpriteInfo(IFileSystemEntry fileEntry, TextureQuality firstQuality = TextureQuality.Ultra, SpriteInfo? parent = null)
+    public SpriteInfo(string name, string texturesDirPath, string filePath,
+        TextureQuality firstQuality = TextureQuality.Ultra, SpriteInfo? parent = null)
     {
-        _name = fileEntry.Name;
+        _name = name;
         _parent = parent;
-        FileEntry = fileEntry;
+        Path = filePath;
+        if (!FileAccess.FileExists(Path))
+            throw new FileNotFoundException();
+        _texturesDirPath = texturesDirPath;
         _firstQuality = firstQuality;
 
         Load();
@@ -56,7 +59,7 @@ public partial class SpriteInfo : Node
     private void Load()
     {
         var parser = new XmlParser();
-        parser.OpenBuffer()
+        parser.Open(Path);
         SpriteInfo? currentInfo = null;
         FrameInfo? currentFrame = null;
         AnimationEntry? currentAnimation = null;
@@ -108,7 +111,7 @@ public partial class SpriteInfo : Node
                         case "Animation":
                         {
                             var animationName = attributesDict["name"].AsString();
-                            currentAnimation = new AnimationEntry(currentFrame, _f, this.Path,
+                            currentAnimation = new AnimationEntry(currentFrame, _texturesDirPath, this.Path,
                                 _firstQuality, animationName);
                             break;
                         }

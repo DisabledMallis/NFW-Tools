@@ -22,7 +22,7 @@ public partial class CompoundSprite : Node2D
 	private readonly SparseList<CellEntry> _childCells = new();
 	public Dictionary<string, CustomVariable> CustomVariables = new();
 	public double PlaybackSpeed = 1.0;
-	public IAssetSource DataSource = JetFileImporter.Instance();
+	public IFileImporter DataSource = JetFileImporter.Instance();
 
 	public EventHandler? Loaded = null;
 	public bool FullyLoaded { get; private set; }

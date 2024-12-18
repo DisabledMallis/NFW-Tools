@@ -7,7 +7,7 @@ using Godot;
 using BloonsTD5Rewritten.NewFramework.Scripts.Compound;
 using BloonsTD5Rewritten.Tools.CompoundSprite;
 
-public partial class CsEditorZone : HSplitContainer, IAssetSource
+public partial class CsEditorZone : HSplitContainer, IFileImporter
 {
 	[Export] public Node2D? PreviewOwner;
 	[Export] public CompoundSprite? PreviewSprite;
