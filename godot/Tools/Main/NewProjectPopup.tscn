@@ -7,20 +7,14 @@
 font_size = 14
 font_color = Color(1, 0, 0, 1)
 
-[node name="NewProjectPopup" type="Window" node_paths=PackedStringArray("ProjectLocationEdit", "ProjectLocationError", "GameLocationEdit", "GameLocationError", "CancelButton", "CreateButton")]
+[node name="NewProjectPopup" type="Window" node_paths=PackedStringArray("CancelButton")]
 title = "New Project"
 initial_position = 2
 size = Vector2i(400, 180)
 exclusive = true
-force_native = true
 min_size = Vector2i(400, 180)
 script = ExtResource("1_o44d0")
-ProjectLocationEdit = NodePath("MarginContainer/VBoxContainer/VBoxContainer/ProjectSelect/LineEdit")
-ProjectLocationError = NodePath("MarginContainer/VBoxContainer/VBoxContainer/ProjectLabelContainer/ErrorLabel")
-GameLocationEdit = NodePath("MarginContainer/VBoxContainer/VBoxContainer/GameSelect/LineEdit")
-GameLocationError = NodePath("MarginContainer/VBoxContainer/VBoxContainer/GameLabelContainer/ErrorLabel")
 CancelButton = NodePath("MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/Cancel")
-CreateButton = NodePath("MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer/Create")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15

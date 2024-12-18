@@ -14,7 +14,7 @@ public partial class TextureLoader : Node
 	{
 		return _instance;
 	}
-	private Node? _assetImporterConfig;
+	public IAssetSource? FileSource;
 
 	private List<SpriteInfo>? _spritesRoot;
 	public List<SpriteInfo>? SpritesRoot => _spritesRoot;
@@ -27,13 +27,7 @@ public partial class TextureLoader : Node
 		_instance = this;
 		
 		//Get the instance of the gdscript from the root
-		_assetImporterConfig = GetNode<Node>("/root/AssetImporterConfig");
-		var assetsDir = _assetImporterConfig.Get("assets_dir");
-		GD.Print("Loading assets from: " + assetsDir);
-		
-		var texturesDir = assetsDir + "/Textures";
-		var texturesDirAccess = DirAccess.Open(texturesDir);
-		_spritesRoot = LoadSpriteInfo(texturesDirAccess);
+		_spritesRoot = LoadSpriteInfo();
 	}
 
 	public ImageTexture? GetTrackThumb(string trackName)
@@ -45,8 +39,7 @@ public partial class TextureLoader : Node
 
 		_thumbLoadTasks[trackName] = Task.Run(() =>
 		{
-			var assetsDir = _assetImporterConfig?.Get("assets_dir");
-			var texturesDir = assetsDir + "/Textures";
+			var texturesDir = "Assets/Textures";
 			var imageFile = texturesDir + "/Ultra/track_thumbs/" + trackName + "_thumb.jpg";
 			var image = Image.LoadFromFile(imageFile);
 			var texture = ImageTexture.CreateFromImage(image);
@@ -82,12 +75,12 @@ public partial class TextureLoader : Node
 		return _spritesRoot!.Select(info => info.FindFrame(name)).FirstOrDefault(result => result != null);
 	}
 		
-	private static List<SpriteInfo>? LoadSpriteInfo(DirAccess texturesDir)
+	private List<SpriteInfo>? LoadSpriteInfo()
 	{
-		List<SpriteInfo>? results = new();
-		var dirPath = texturesDir.GetCurrentDir();
-		
-		texturesDir.ListDirBegin();
+		var rootEntry = FileSource?.GetRootEntry();
+		var texturesDir = rootEntry?.GetChild("Textures");
+
+		/*texturesDir.ListDirBegin();
 		var filename = texturesDir.GetNext();
 		while (!string.IsNullOrEmpty(filename))
 		{
@@ -96,8 +89,8 @@ public partial class TextureLoader : Node
 				results.Add(new SpriteInfo(filename.Replace(".xml", ""), dirPath, dirPath + "/" + filename));
 			}
 			filename = texturesDir.GetNext();
-		}
+		}*/
 
-		return results;
+		return (from entry in texturesDir!.GetChildren() where !entry.IsDirectory select new SpriteInfo(entry)).ToList();
 	}
 }

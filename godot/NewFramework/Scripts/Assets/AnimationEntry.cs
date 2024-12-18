@@ -5,34 +5,32 @@ namespace BloonsTD5Rewritten.NewFramework.Scripts.Assets;
 
 public partial class AnimationEntry : Node
 {
-    private string _texturesDirPath;
-    private string _filePath;
+    private IFileSystemEntry? _fileEntry;
     private TextureQuality _quality;
-    private readonly List<BloonsTD5Rewritten.NewFramework.Scripts.Assets.CellEntry> _cells = new();
+    private readonly List<CellEntry> _cells = new();
 
     public string AnimationName;
     public FrameInfo Parent;
     
-    public AnimationEntry(FrameInfo parent, string texturesDirPath, string filePath, TextureQuality quality, string animationName)
+    public AnimationEntry(FrameInfo parent, IFileSystemEntry entry, TextureQuality quality, string animationName)
     {
         Parent = parent;
-        _texturesDirPath = texturesDirPath;
-        _filePath = filePath;
+        _fileEntry = entry;
         _quality = quality;
         AnimationName = animationName;
     }
 
-    public void AddCell(BloonsTD5Rewritten.NewFramework.Scripts.Assets.CellEntry entry)
+    public void AddCell(CellEntry entry)
     {
         _cells.Add(entry);
     }
 
-    public BloonsTD5Rewritten.NewFramework.Scripts.Assets.CellEntry? GetCell(string name)
+    public CellEntry? GetCell(string name)
     {
         return _cells.Find(entry => entry.CellName == name);
     }
 
-    public BloonsTD5Rewritten.NewFramework.Scripts.Assets.CellEntry? FindCell(string name)
+    public CellEntry? FindCell(string name)
     {
         return _cells.Find(cell => cell.CellName == name);
     }
